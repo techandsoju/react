@@ -28,6 +28,17 @@ function App() {
    
   }, []);
 
+  // Polling a payment transaction data every second.
+  useEffect(() => {
+    const interval = setInterval(updateState, 1000);
+
+    return () => {
+      console.log(`clearing interval`);
+      clearInterval(interval);
+    };
+
+  }, [updateState]);
+
   // Get users api endpoint
   const getVaildUsersState = useCallback(async () => {
     const response = await fetch(`${BASEURL}${ENDPOINTS.USERS}`);
@@ -39,17 +50,6 @@ function App() {
   useEffect(() => {
     getVaildUsersState()
   },[]);
-
-
-  useEffect(() => {
-    const interval = setInterval(updateState, 1000);
-
-    return () => {
-      console.log(`clearing interval`);
-      clearInterval(interval);
-    };
-
-  }, [updateState]);
 
   return (
     <>
