@@ -124,7 +124,7 @@ function PaymentCreation(props) {
             setIsPaymentInProgress(true);
             console.log("IN THE KNOW")
             console.log(postData.current)
-            const res = await fetch("http://localhost:8080/payments", {
+            const res = await fetch("http://13.58.121.111:8080/payments", {
                 method: "POST",
                 mode: 'cors',
                 headers: {

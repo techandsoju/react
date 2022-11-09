@@ -8,7 +8,7 @@ import { addPayments } from './features/payments/paymentsSlice';
 
 function App() {
 
-  const BASEURL = "http://localhost:8080"
+  const BASEURL = "http://13.58.121.111:8080"
   const ENDPOINTS = {
     PAYMENTS: "/payments",
     USERS: "/users"
