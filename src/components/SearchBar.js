@@ -9,14 +9,6 @@ function SearchBar() {
 
     const dispatch = useDispatch()
 
-    const handleSearchTerm = () => {
-        // if (!searchTermInput) {
-        //     dispatch(setSearchTerm(""));
-        // };
-        // dispatch(setSearchTerm(searchTermInput));
-        // setSearchTermInput(searchTermInput)
-    }
-
     return (
         <>
             <div className="flex items-center m-3 ">
@@ -39,24 +31,6 @@ function SearchBar() {
                         placeholder="Search: Payment ID, Date, Sender, Receiver, Amount, Currency..."
                         onChange={(event) => dispatch(setFilter(event.target.value.toLowerCase()))} />
                 </div>
-                {/* <button
-                    type="submit"
-                    className="p-2.5 ml-2 text-sm font-medium text-white bg-black rounded-lg border border-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={handleSearchTerm}>
-                    <svg className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
-                        </path>
-                    </svg>
-                    <span className="sr-only">Search</span>
-                </button> */}
             </div>
         </>
     );

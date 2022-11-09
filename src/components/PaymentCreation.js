@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { addPayments } from '../features/payments/paymentsSlice';
-import { setUsers } from '../features/users/usersSlice';
 import Seedrandom from 'seedrandom';
 
 function PaymentCreation(props) {
@@ -21,19 +20,8 @@ function PaymentCreation(props) {
         })
     };
 
-    // const storeFilteredUsers = useSelector(
-    //     (state) => state.users.values
-    // )
-
     const [usersData, setUserData] = useState([]);
     
-    // useEffect(() => {
-    //   setData(storeFilteredUsers)
-    //     console.log("YOOO!")
-    // }, [storeFilteredUsers])
-
-    // const [filteredSelectedUsers, setFilteredSelectedUsers] = useState(()=>initFilteredUserValues);
-
     const postData = useRef({});
 
     // Got this code from the server to generate seed random for payment ID, 
@@ -85,11 +73,6 @@ function PaymentCreation(props) {
         }
 
         postData.current = newPaymentPostData;
-        // console.log("before="+JSON.stringify(newPaymentPostData));
-        // console.log("targetValue="+event.target[0].value); 
-        // console.log(event.target.sender_user_list.value);
-        // console.log(event.target.sender_user_list.selectedIndex);
-        // console.log(event.target.sender_user_list[senderSelectedIndex].text);
     };
 
 
@@ -103,26 +86,14 @@ function PaymentCreation(props) {
         console.log(event.target);
         console.log("eventLabel=target name=" + event.target.name + " | value=" + event.target.value + " | text=" + event.target[event.target.selectedIndex].text);
 
-        // const [firstName1, lastName1] = event.target[event.target.selectedIndex].text.split(" ");
-        // console.log("firstName="+firstName1,"lastName="+lastName1);
-
-        // const [firstName2, lastName2] = event.target.receiver_user_list[event.target.receiver_user_list.selectedIndex].text.split(" ");
-        // console.log("firstName="+firstName2,"lastName="+lastName2);
-
-
         if (event.target.name == "sender_user_list") {
         
-
             console.log(event);
 
             const [firstName1, lastName1] = event.target[event.target.selectedIndex].text.split(" ");
             console.log("firstName="+firstName1,"lastName="+lastName1);
     
-            // const [firstName2, lastName2] = event.target[event.target.selectedIndex].text.split(" ");
-            // console.log("firstName="+firstName2,"lastName="+lastName2);
-
             setAvatarInitials1(`${firstName1[0]}${lastName1[0]}`);
-            // setAvatarInitials1(`${firstName2[0]}${lastName2[0]}`);
 
             setUserData({
                 sender: props.users, receiver: props.users.filter((user) => {
@@ -131,14 +102,10 @@ function PaymentCreation(props) {
                 })
             })
         } else if (event.target.name == "receiver_user_list") {
-
-            // const [firstName1, lastName1] = event.sender_user_list[event.sender_user_list.selectedIndex].text.split(" ");
-            // console.log("firstName="+firstName1,"lastName="+lastName1);
     
             const [firstName2, lastName2] = event.target[event.target.selectedIndex].text.split(" ");
             console.log("firstName="+firstName2,"lastName="+lastName2);
 
-            // setAvatarInitials1(`${firstName1[0]}${lastName1[0]}`);
             setAvatarInitials2(`${firstName2[0]}${lastName2[0]}`);
             console.log("event.target.value="+event.target.value);
 

@@ -10,7 +10,7 @@ const paymentLabels =
 
 const DISPLAY_LIMIT = 25;
 
-function PaymentList(props) {
+function PaymentList() {
 
     const paymentsObj = useSelector( 
         (state) => state.payments
