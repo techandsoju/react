@@ -4,9 +4,7 @@ import './App.css';
 import PaymentList from './components/PaymentList';
 import SearchBar from './components/SearchBar';
 import PaymentCreation from './components/PaymentCreation'
-import { addPayments, filterPayments, setFilterPayments } from './features/payments/paymentsSlice';
-
-
+import { addPayments } from './features/payments/paymentsSlice';
 
 function App() {
 
@@ -16,14 +14,12 @@ function App() {
     USERS: "/users"
   };
 
-  const searchTerm = useSelector(state => state.payments.filterTerm);
-  const paymentValues = useSelector(state => state.payments.values);
   const [validUsers, setValidUsers] = useState([]);
-  const arrayEmptyInitialize = Array(25).fill({ sender: " ", receiver: " ", amount: " ", currency: " " });
 
   // Redux  
   const dispatch = useDispatch()
 
+  // Get payments api endpoint
   const updateState = useCallback(async () => {
     const response = await fetch(`${BASEURL}${ENDPOINTS.PAYMENTS}`);
     const data = await response.json();
@@ -32,6 +28,7 @@ function App() {
    
   }, []);
 
+  // Get users api endpoint
   const getVaildUsersState = useCallback(async () => {
     const response = await fetch(`${BASEURL}${ENDPOINTS.USERS}`);
     const data = await response.json();

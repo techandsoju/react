@@ -9,7 +9,6 @@ function PaymentCreation(props) {
 
     const [paymentStatus, setPaymentStatus] = useState({});
     const [isPaymentInProgress, setIsPaymentInProgress] = useState(false);
-    const [selectedUser, setSelectedUser] = useState("");
 
     // Redux  
     const dispatch = useDispatch()
@@ -22,6 +21,7 @@ function PaymentCreation(props) {
 
     const [usersData, setUserData] = useState([]);
     
+    // Post Data to make new payment and add to list.
     const postData = useRef({});
 
     // Got this code from the server to generate seed random for payment ID, 
@@ -78,9 +78,6 @@ function PaymentCreation(props) {
 
     const [avatarInitials1, setAvatarInitials1] = useState("");
     const [avatarInitials2, setAvatarInitials2] = useState("");
-
-
-
 
     const handleSelectedValue = (event) => {
         console.log(event.target);

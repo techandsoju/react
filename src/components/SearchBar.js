@@ -5,8 +5,6 @@ import { filterPayments, setFilter } from '../features/payments/paymentsSlice';
 
 function SearchBar() {
 
-    const [searchTermInput, setSearchTermInput] = useState("");
-
     const dispatch = useDispatch()
 
     return (
