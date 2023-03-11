@@ -1,69 +1,59 @@
-import { useCallback, useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import './App.css';
-import PaymentList from './components/PaymentList';
-import SearchBar from './components/SearchBar';
-import PaymentCreation from './components/PaymentCreation'
-import { addPayments } from './features/payments/paymentsSlice';
+import { useCallback, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+// import { BASEURL, ENDPOINTS } from "./constants";
+import PaymentList from "./components/PaymentList";
+import SearchBar from "./components/SearchBar";
+import PaymentCreation from "./components/PaymentCreation";
+import { addPayments } from "./features/payments/paymentsSlice";
+import { BASEURL, ENDPOINTS } from "./constants";
 
 function App() {
+    const [validUsers, setValidUsers] = useState([]);
 
-  const BASEURL = "http://13.58.121.111:8080"
-  const ENDPOINTS = {
-    PAYMENTS: "/payments",
-    USERS: "/users"
-  };
+    // Redux
+    const dispatch = useDispatch();
 
-  const [validUsers, setValidUsers] = useState([]);
+    // Get payments api endpoint
+    const updateState = useCallback(async () => {
+        const response = await fetch(`${BASEURL}${ENDPOINTS.PAYMENTS}`);
+        const data = await response.json();
 
-  // Redux  
-  const dispatch = useDispatch()
+        dispatch(addPayments(data?.data));
+    }, []);
 
-  // Get payments api endpoint
-  const updateState = useCallback(async () => {
-    const response = await fetch(`${BASEURL}${ENDPOINTS.PAYMENTS}`);
-    const data = await response.json();
+    // Polling a payment transaction data every second.
+    useEffect(() => {
+        const interval = setInterval(updateState, 1000);
 
-    dispatch(addPayments(data?.data));
-   
-  }, []);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
-  // Polling a payment transaction data every second.
-  useEffect(() => {
-    const interval = setInterval(updateState, 1000);
+    // Get users api endpoint
+    const getVaildUsersState = useCallback(async () => {
+        const response = await fetch(`${BASEURL}${ENDPOINTS.USERS}`);
+        const data = await response.json();
+        setValidUsers(data?.data);
+    }, []);
 
-    return () => {
-      console.log(`clearing interval`);
-      clearInterval(interval);
-    };
+    useEffect(() => {
+        getVaildUsersState();
+    }, []);
 
-  }, [updateState]);
-
-  // Get users api endpoint
-  const getVaildUsersState = useCallback(async () => {
-    const response = await fetch(`${BASEURL}${ENDPOINTS.USERS}`);
-    const data = await response.json();
-    console.log("getusers")
-    setValidUsers(data?.data)
-  }, []);
-
-  useEffect(() => {
-    getVaildUsersState()
-  },[]);
-
-  return (
-    <>
-
-      <div className="flex flex-col w-full lg:flex-row bg-base-300 bg-gradient-to-tr from-gray-400 via-gray-400 to-gray-600">
-        <div className="grid flex-grow h-screen place-items-center">
-          <PaymentCreation users={validUsers}/>
-        </div>
-        <div className="grid flex-grow h-screen p-5">
-          <SearchBar />
-          <PaymentList/></div>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className="flex flex-col w-full lg:flex-row bg-base-300 bg-gradient-to-tr from-gray-400 via-gray-400 to-gray-600">
+                <div className="grid flex-grow h-screen place-items-center">
+                    <PaymentCreation users={validUsers} />
+                </div>
+                <div className="flex-grow h-screen p-5">
+                    <SearchBar />
+                    <PaymentList />
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default App;

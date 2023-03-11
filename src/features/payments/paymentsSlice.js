@@ -1,12 +1,17 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-const arrayEmptyInitialize = Array(25).fill({ sender: " ", receiver: " ", amount: " ", currency: " " });
+const arrayEmptyInitialize = Array(25).fill({
+    sender: " ",
+    receiver: " ",
+    amount: " ",
+    currency: " ",
+});
 const initialState = {
     values: [...arrayEmptyInitialize],
     hightlight: false,
-    filterValues: [...arrayEmptyInitialize],
+    filterCategories: [],
     filter: "",
-    filterTerm: ""
+    filterTerm: "",
 };
 
 export const paymentsSlice = createSlice({
@@ -14,16 +19,22 @@ export const paymentsSlice = createSlice({
     initialState,
     reducers: {
         addPayments: (state, action) => {
-            state.values = [action.payload, ...state.values]
+            state.values = [action.payload, ...state.values];
         },
-        setFilterPayments: (state, action) => {
-            state.filterValues = [...action.payload, ...arrayEmptyInitialize]
+        setFilterCategories: (state, action) => {
+            state.filterCategories = action.payload;
         },
         setFilter: (state, action) => {
-            state.filter = action.payload
-        }
-    }
-})
+            state.filter = action.payload;
+        },
+    },
+});
 
-export const { addPayments, highlightPayment, setFilter, filterPayments, setFilterPayments } = paymentsSlice.actions
-export default paymentsSlice.reducer
+export const {
+    addPayments,
+    highlightPayment,
+    setFilter,
+    filterCategories,
+    setFilterCategories,
+} = paymentsSlice.actions;
+export default paymentsSlice.reducer;
