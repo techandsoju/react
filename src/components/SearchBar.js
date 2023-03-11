@@ -19,7 +19,9 @@ function SearchBar() {
     const handleSelectChange = (selectedOptions) => {
         setSelectedOptions(selectedOptions);
         console.log(
-            `array filter: ${selectedOptions.map((option) => option.value)}`
+            `set categories filter: ${selectedOptions.map(
+                (option) => option.value
+            )}`
         );
         dispatch(
             setFilterCategories(selectedOptions.map((option) => option.value))
