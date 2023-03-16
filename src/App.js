@@ -4,31 +4,31 @@ import { useDispatch } from "react-redux";
 import PaymentList from "./components/PaymentList";
 import SearchBar from "./components/SearchBar";
 import PaymentCreation from "./components/PaymentCreation";
-import { addPayments } from "./features/payments/paymentsSlice";
+// import { addPayments } from "./features/payments/paymentsSlice";
 import { BASEURL, ENDPOINTS } from "./constants";
+import Payments from "./components/Payments/Payments";
 
 function App() {
     const [validUsers, setValidUsers] = useState([]);
 
-    // Redux
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // Get payments api endpoint
-    const updateState = useCallback(async () => {
-        const response = await fetch(`${BASEURL}${ENDPOINTS.PAYMENTS}`);
-        const data = await response.json();
+    // const updateState = useCallback(async () => {
+    //     const response = await fetch(`${BASEURL}${ENDPOINTS.PAYMENTS}`);
+    //     const data = await response.json();
 
-        dispatch(addPayments(data?.data));
-    }, []);
+    //     dispatch(addPayments(data?.data));
+    // }, []);
 
     // Polling a payment transaction data every second.
-    useEffect(() => {
-        const interval = setInterval(updateState, 1000);
+    // useEffect(() => {
+    //     const interval = setInterval(updateState, 1000);
 
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
+    //     return () => {
+    //         clearInterval(interval);
+    //     };
+    // }, []);
 
     // Get users api endpoint
     const getVaildUsersState = useCallback(async () => {
@@ -49,8 +49,9 @@ function App() {
                 </div>
                 <div className="flex-grow h-screen p-5">
                     <SearchBar />
-                    <PaymentList />
+                    {/* <PaymentList /> */}
                 </div>
+                <Payments />
             </div>
         </>
     );
