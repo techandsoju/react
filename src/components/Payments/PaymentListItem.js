@@ -1,13 +1,14 @@
+import { TR, TD } from "./PaymentList";
+
 export default function PaymentListItem({ data, index }) {
     return (
-        <li style={{ padding: 12 }}>
-            {data[index].currency}
-            {data[index].amount}
-            {data[index].id}
-            {data[index].memo}
-            {data[index].receiver.name}
-            {data[index].sender.name}
-            {data[index].currency}
-        </li>
+        <TR>
+            <TD>{data[index].id}</TD>
+            <TD>{data[index].sender.name}</TD>
+            <TD>{data[index].receiver.name}</TD>
+            <TD>{data[index].currency}</TD>
+            <TD>{data[index].amount}</TD>
+            <TD>{data[index].memo}</TD>
+        </TR>
     );
 }

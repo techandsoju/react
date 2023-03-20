@@ -106,7 +106,7 @@ export default function Payments() {
     }
 
     return (
-        <div>
+        <div className="flex flex-col gap-4">
             <PaymentSearch
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}

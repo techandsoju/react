@@ -20,11 +20,13 @@ function App() {
 
     return (
         <>
-            <div className="flex flex-col w-full lg:flex-row bg-base-300 bg-gradient-to-tr from-gray-400 via-gray-400 to-gray-600">
-                <div className="grid flex-grow h-screen place-items-center">
+            <div className="flex flex-row justify-between px-16 w-full lg:flex-row bg-base-300 bg-gradient-to-tr from-gray-400 via-gray-400 to-gray-600 h-screen">
+                <div className="grid place-items-center">
                     <PaymentCreation users={validUsers} />
                 </div>
-                <Payments />
+                <div>
+                    <Payments />
+                </div>
             </div>
         </>
     );
