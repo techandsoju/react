@@ -19,7 +19,7 @@ export default function Payments() {
             setPaymentList([payment, ...paymentList]);
         }
 
-        const intervalId = setInterval(() => fetchPayments(), 5000);
+        const intervalId = setInterval(() => fetchPayments(), 1000);
 
         return () => clearInterval(intervalId);
     }, [paymentList]);
